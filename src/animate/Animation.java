@@ -7,7 +7,7 @@ public abstract class Animation extends Fenster implements Runnable {
     public Animation(String title, int width, int height) {
         super(title, width, height);
         Thread t = new Thread(this);
-        t.run();
+        t.start();
     }
 
     @Override
