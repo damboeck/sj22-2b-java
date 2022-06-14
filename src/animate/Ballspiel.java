@@ -6,8 +6,13 @@ import java.awt.event.MouseEvent;
 
 public class Ballspiel extends Animation {
 
+    private Ball ball;
+    private long t;    // Systemzeit in ms
+
     public Ballspiel(String title, int width, int height) {
         super(title, width, height);
+        ball = new Ball(new Vect2D(200,200),new Vect2D(0.5,-0.1),50,Color.red);
+        t = System.currentTimeMillis();
         this.setVisible(true);
     }
 
@@ -17,7 +22,16 @@ public class Ballspiel extends Animation {
 
     @Override
     public void paint(Graphics g) {
-
+        long takt = System.currentTimeMillis();
+        long dT = takt - t;
+        t = takt;
+        Vect2D a = new Vect2D(0,0.0005);
+        ball.calcTime(dT,a);
+        ball.wallX(0);
+        ball.wallX(this.getWidth());
+        ball.wallY(25);
+        ball.wallY(this.getHeight());
+        ball.paint(g);
     }
 
     /**
